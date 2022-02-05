@@ -44,6 +44,16 @@ There will be two endpoints:
 
 ### test
 ```
+# run composer
+composer install
+
+# env
+cp .env.example .env 
+
+# adjust env parameteres
+
+# set up database (using db.sql file in ./database)
+
 # run server
 php -S 127.0.0.1:8000 -t public
 

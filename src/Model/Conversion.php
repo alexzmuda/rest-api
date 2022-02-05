@@ -19,7 +19,7 @@ class Conversion
 	const CONVERSION_STATUSES = [
 		'AWAIT' => 0,
 		'PROCESSING' => 1,
-		'COMPLETED' => 2
+		'PROCESSED' => 2
 	];
 
 	protected $table = 'conversions';

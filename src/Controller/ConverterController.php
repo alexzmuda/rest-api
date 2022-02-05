@@ -2,6 +2,7 @@
 
 namespace Src\Controller;
 
+use Src\Model\Conversion;
 use Src\Repository\ConversionRepository;
 
 class ConverterController
@@ -63,6 +64,9 @@ class ConverterController
 		$result = $this->conversionRepository->find($id);
 		if (!$result) {
 			return $this->notFoundResponse();
+		}
+		if ((int) $result['status'] === (int) Conversion::CONVERSION_STATUSES['PROCESSED']) {
+			$result['file'] = 'url_to_converted_file';
 		}
 		$response['status_code_header'] = 'HTTP/1.1 200 OK';
 		$response['body'] = json_encode($result);
