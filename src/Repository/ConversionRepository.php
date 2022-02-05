@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Src\Repository;
 
@@ -69,7 +70,7 @@ class ConversionRepository implements ConversionRepositoryInterface
 			$statement = $this->db->prepare($statement);
 			$statement->execute(array(
 				'id' => (int)$id,
-				'status' => (int) $status
+				'status' => (int)$status
 			));
 			return $statement->rowCount();
 		} catch (\PDOException $e) {
@@ -103,11 +104,12 @@ class ConversionRepository implements ConversionRepositoryInterface
 	{
 		$statement = "
 			DELETE FROM conversions 
-			WHERE id = :id;";
+			WHERE id = :id
+			LIMIT 1;";
 
 		try {
 			$statement = $this->db->prepare($statement);
-			$statement->execute(array('id' => $id));
+			$statement->execute(array('id' => (int)$id));
 			return $statement->rowCount();
 		} catch (\PDOException $e) {
 			exit($e->getMessage());

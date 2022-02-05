@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Src\Model;
 
@@ -7,7 +8,8 @@ namespace Src\Model;
  *
  * @property int $id
  * @property string $name
- * @property int $status
+ * @property int $status,
+ * @property int $pid
  *
  */
 class Conversion
@@ -15,6 +17,9 @@ class Conversion
 	const ID = 'id';
 	const NAME = 'name';
 	const STATUS = 'status';
+	const PID = 'pid';
+
+	const CONVERSION_STATUSES_IDS = [0, 1, 2];
 
 	const CONVERSION_STATUSES = [
 		'AWAIT' => 0,
@@ -27,6 +32,18 @@ class Conversion
 	protected $casts = [
 		self::ID => 'int',
 		self::STATUS => 'int',
+		self::PID => 'pid'
 	];
 
+
+	/**
+	 * @throws \Exception
+	 */
+	public function setStatus(int $status) : bool
+	{
+		if (!in_array($status, self::CONVERSION_STATUSES_IDS)) {
+			return false;
+		}
+		return true;
+	}
 }

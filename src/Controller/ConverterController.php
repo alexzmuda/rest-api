@@ -65,7 +65,7 @@ class ConverterController
 		if (!$result) {
 			return $this->notFoundResponse();
 		}
-		if ((int) $result['status'] === (int) Conversion::CONVERSION_STATUSES['PROCESSED']) {
+		if ((int)$result['status'] === (int)Conversion::CONVERSION_STATUSES['PROCESSED']) {
 			$result['file'] = 'url_to_converted_file';
 		}
 		$response['status_code_header'] = 'HTTP/1.1 200 OK';
@@ -123,7 +123,11 @@ class ConverterController
 
 	private function validateStatus($input)
 	{
-		if (!isset($input['status'])) {
+		$status = $input['status'];
+
+		if (!isset($status)
+			|| !(new Conversion())->setStatus($status)
+		) {
 			return false;
 		}
 		return true;
