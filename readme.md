@@ -54,6 +54,10 @@ cp .env.example .env
 
 # set up database (using db.sql file in ./database)
 
+# run seeder
+cd database
+php seeder.php
+
 # run server
 php -S 127.0.0.1:8000 -t public
 
