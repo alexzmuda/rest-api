@@ -29,8 +29,8 @@ Cron job will launch and pick conversion items with processing flag = 0 and do f
 
 This is required to avoid concurrency and collision i.e. if 2 jobs want to process same conversion item.
 
-Additionaly, there should be solution to validate if cron job did not stuck, 
-and if it stucked - reset processing flag to 0
+Additionally, there should be a solution to validate if cron job did not stucked, 
+and if it has stuck - reset processing flag to 0
 
 There will be two endpoints:
 1. run conversion

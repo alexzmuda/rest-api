@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Seeder;
+namespace Src\Seeder;
 
 class FileSeeder
 {
