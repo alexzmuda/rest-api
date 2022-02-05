@@ -2,7 +2,7 @@
 
 namespace Src\Repository\Interfaces;
 
-interface FileRepositoryInterface
+interface ConversionRepositoryInterface
 {
 	// returns list of all files
 	public function index();
@@ -11,7 +11,7 @@ interface FileRepositoryInterface
 	public function store(array $data);
 
 	// change status for specified file
-	public function changeStatus($id, $status);
+	public function update($id, $status);
 
 	// fetch file record
 	public function find($id);

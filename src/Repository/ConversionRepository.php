@@ -2,9 +2,10 @@
 
 namespace Src\Repository;
 
-use Src\Repository\Interfaces\FileRepositoryInterface;
+use Src\Repository\Interfaces\ConversionRepositoryInterface;
+use Src\Model\Conversion;
 
-class FileRepository implements FileRepositoryInterface
+class ConversionRepository implements ConversionRepositoryInterface
 {
 
 	private $db = null;
@@ -44,7 +45,7 @@ class FileRepository implements FileRepositoryInterface
 			$statement = $this->db->prepare($statement);
 			$statement->execute(array(
 				'name' => $data['name'],
-				'status' => $data['status'],
+				'status' => Conversion::CONVERSION_STATUSES['AWAIT'],
 			));
 			return $statement->rowCount();
 		} catch (\PDOException $e) {
@@ -53,22 +54,22 @@ class FileRepository implements FileRepositoryInterface
 	}
 
 
-	public function changeStatus($id, $status)
+	public function update($id, $status)
 	{
 		$statement = "
             UPDATE 
             	conversions
             SET 
-                status = :status,
+                status = :status
             WHERE 
-            	id = :id;
+            	id = :id
         ";
 
 		try {
 			$statement = $this->db->prepare($statement);
 			$statement->execute(array(
 				'id' => (int)$id,
-				'status' => $status,
+				'status' => (int) $status
 			));
 			return $statement->rowCount();
 		} catch (\PDOException $e) {
@@ -84,11 +85,13 @@ class FileRepository implements FileRepositoryInterface
   			FROM 
   				conversions 
   			WHERE 
-  				id = :id;";
+  				id = :id";
 
 		try {
 			$query = $this->db->prepare($query);
-			$query->execute(array($id));
+			$query->execute(array(
+				'id' => (int)$id
+			));
 			$result = $query->fetch(\PDO::FETCH_ASSOC);
 			return $result;
 		} catch (\PDOException $e) {

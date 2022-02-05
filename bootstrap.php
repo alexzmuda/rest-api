@@ -9,5 +9,6 @@ error_reporting(E_ALL);
 
 $dotenv = new DotEnv(__DIR__);
 $dotenv->load();
+
+# connect to db
 $dbConnection = (new DatabaseConnection())->getConnection();
-var_dump($dbConnection);
