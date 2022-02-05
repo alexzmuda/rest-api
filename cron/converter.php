@@ -38,6 +38,8 @@ try {
 	));
 
 	// here it can send notification or email that file has been processed.
+	// ...
+
 	exit;
 
 } catch (\PDOException $e) {
