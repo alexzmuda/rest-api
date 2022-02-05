@@ -40,3 +40,33 @@ There will be two endpoints:
 ##### Things to do in next steps (not covered here)
 * add limit of concurency workers - 3.
 * multiple workers, scaling.  
+
+
+### test
+```
+# run server
+php -S 127.0.0.1:8000 -t public
+
+# fetch all conversions
+curl -X GET http://127.0.0.1:8000/conversion
+
+# fetch conversion
+curl -X GET http://127.0.0.1:8000/conversion/1
+
+# create conversion
+curl -X POST -d '{"name":"testfile"}' http://127.0.0.1:8000/conversion
+
+# update status to await
+curl -X PUT -d '{"status": 0}' http://127.0.0.1:8000/conversion/1
+
+# update status to processing
+curl -X PUT -d '{"status": 1}' http://127.0.0.1:8000/conversion/1
+
+# update status to processed
+curl -X PUT -d '{"status": 2}' http://127.0.0.1:8000/conversion/1
+
+# delete conversion
+curl -X DELETE http://127.0.0.1:8000/conversion/2
+
+
+```
