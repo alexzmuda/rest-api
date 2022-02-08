@@ -126,7 +126,7 @@ class ConverterController
 		$status = $input['status'];
 
 		if (!isset($status)
-			|| !(new Conversion())->setStatus($status)
+			|| !(new Conversion())->isStatusAllowed($status)
 		) {
 			return false;
 		}

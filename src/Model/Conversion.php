@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Src\Model;
 
+use App\Exception\StatusNotAllowedException;
+
 /**
  * Class Conversion
  *
@@ -36,14 +38,37 @@ class Conversion
 	];
 
 
+	public function setName($name) {
+		$this->name = $name;
+	}
+
 	/**
-	 * @throws \Exception
+	 * @throws StatusNotAllowedException
 	 */
-	public function setStatus(int $status) : bool
+	public function setStatus($status) {
+		if (!self::isStatusAllowed($status)) {
+			throw new StatusNotAllowedException();
+		}
+		$this->status = $status;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStatus(): int
+	{
+		return $this->status;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isStatusAllowed(int $status): bool
 	{
 		if (!in_array($status, self::CONVERSION_STATUSES_IDS)) {
 			return false;
 		}
 		return true;
 	}
+
 }
