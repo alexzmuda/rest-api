@@ -83,5 +83,5 @@ curl -X PUT -d '{"status": 2}' http://127.0.0.1:8000/conversion/1
 curl -X DELETE http://127.0.0.1:8000/conversion/2
 
 # php unit tests
-./vendor/bin/phpunit src/Tests/Unit
+./vendor/bin/phpunit src
 ```
