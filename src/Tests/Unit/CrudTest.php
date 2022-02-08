@@ -18,7 +18,7 @@ final class CrudTest extends TestCase
 			'headers' => ['Content-Type' => 'application/json']
 		]);
 
-		$request = new Request('GET', 'http://127.0.0.1:8000/conversion');
+		$request = new Request('GET', '/conversion');
 		$response = $client->send($request, []);
 
 		$this->assertEquals(200, $response->getStatusCode());
@@ -38,7 +38,7 @@ final class CrudTest extends TestCase
 			'status' => 1
 		);
 
-		$request = new Request('POST', 'http://127.0.0.1:8000/conversion');
+		$request = new Request('POST', '/conversion');
 		$response = $client->send($request,
 			[
 				'body' => json_encode($data)
