@@ -17,17 +17,14 @@
     "phpunit/phpunit": "^9.5",
     "brainmaestro/composer-git-hooks": "^2.8"
   },
-  "post-root-package-install": [
-    "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-  ],
   "extra": {
     "hooks": {
-      "config": {
-        "stop-on-failure": ["pre-push"]
-      },
-      "pre-push": [
-        "./vendor/bin/phpunit src --dry-run --stop-on-violation"
+      "pre-commit": [
+        "./vendor/bin/phpunit src"
       ]
     }
-  }
+  },
+  "post-root-package-install": [
+    "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+  ]
 }
